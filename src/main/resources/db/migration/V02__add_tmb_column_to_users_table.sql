@@ -1,0 +1,2 @@
+ALTER TABLE users
+ADD COLUMN tmb NUMERIC(10, 2);

@@ -72,6 +72,9 @@ public class User implements UserDetails, Serializable {
     @Column(name = "imc", columnDefinition = "NUMERIC(4,2)")
     private Double imc;
 
+    @Column(name = "tmb", columnDefinition = "NUMERIC(10,2)")
+    private Double tmb;
+
     private boolean active = true;
 
     @Override

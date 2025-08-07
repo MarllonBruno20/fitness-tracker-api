@@ -3,6 +3,7 @@ package br.com.marllonbruno.fitnesstracker.api.dto.response;
 import br.com.marllonbruno.fitnesstracker.api.entity.User;
 import br.com.marllonbruno.fitnesstracker.api.entity.enuns.ActivityLevel;
 import br.com.marllonbruno.fitnesstracker.api.entity.enuns.Gender;
+import br.com.marllonbruno.fitnesstracker.api.entity.enuns.Objective;
 
 import java.time.LocalDate;
 
@@ -14,6 +15,7 @@ public record ProfileDataResponse(
         Double goalWeightKg,
         Gender gender,
         ActivityLevel activityLevel,
+        Objective objective,
         Integer dailyCaloriesGoal,
         Integer dailyProteinGoal,
         Integer dailyCarbsGoal,
@@ -31,6 +33,7 @@ public record ProfileDataResponse(
                 user.getGoalWeightKg(),
                 user.getGender(),
                 user.getActivityLevel(),
+                user.getObjective(),
                 user.getDailyCaloriesGoal(),
                 user.getDailyProteinGoal(),
                 user.getDailyCarbsGoal(),

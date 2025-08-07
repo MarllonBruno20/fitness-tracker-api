@@ -2,6 +2,7 @@ package br.com.marllonbruno.fitnesstracker.api.dto.request;
 
 import br.com.marllonbruno.fitnesstracker.api.entity.enuns.ActivityLevel;
 import br.com.marllonbruno.fitnesstracker.api.entity.enuns.Gender;
+import br.com.marllonbruno.fitnesstracker.api.entity.enuns.Objective;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Positive;
@@ -28,6 +29,9 @@ public record ProfileUpdateRequest(
         Gender gender,
 
         @NotNull(message = "Por favor, informe o seu nivel de atividade fisica")
-        ActivityLevel activityLevel
+        ActivityLevel activityLevel,
+
+        @NotNull(message = "Por favor, informe o seu objetivo de dieta")
+        Objective objective
 ) {
 }

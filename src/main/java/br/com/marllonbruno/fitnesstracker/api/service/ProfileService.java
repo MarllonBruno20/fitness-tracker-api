@@ -37,10 +37,13 @@ public class ProfileService {
 
         // Já pego o usuário autenticado, responsável pela requisição
         User currentUser = getAuthenticatedUser();
+        System.out.println("Encontrei o usuário autenticado: " + currentUser.getEmail());
 
         updateUserDataFromRequest(currentUser, request);
+        System.out.println("Atualizei os dados do usuário: " + currentUser.getObjective());
 
         calculateAllMetrics(currentUser);
+        System.out.println("Calculou as métricas do usuário: " + currentUser.getDailyCaloriesGoal());
 
         return userRepository.save(currentUser);
 
@@ -53,7 +56,12 @@ public class ProfileService {
         user.setGoalWeightKg(request.goalWeightKg());
         user.setGender(request.gender());
         user.setActivityLevel(request.activityLevel());
+        user.setObjective(request.objective());
     }
+
+    private static final int CALORIC_DEFICIT = 500;  // Déficit de 500 kcal para perda de peso
+    private static final int CALORIC_SURPLUS = 300;  // Superávit de 300 kcal para ganho de massa
+
 
     private void calculateAllMetrics(User user) {
         double imc = calculateIMC(user);
@@ -62,10 +70,15 @@ public class ProfileService {
         double bmr = calculateBMR(user);
         user.setTmb(bmr);
 
-        int tdee = calculateTDEE(bmr, user.getActivityLevel());
-        user.setDailyCaloriesGoal(tdee);
+        int maintenanceCalories  = calculateTDEE(bmr, user.getActivityLevel());
+        int finalCalorieGoal = switch (user.getObjective()) {
+            case LOSE_WEIGHT -> maintenanceCalories - CALORIC_DEFICIT;
+            case GAIN_MUSCLE -> maintenanceCalories + CALORIC_SURPLUS;
+            case MAINTAIN_WEIGHT -> maintenanceCalories;
+        };
+        user.setDailyCaloriesGoal(finalCalorieGoal);
 
-        calculateMacros(user, tdee);
+        calculateMacros(user, finalCalorieGoal);
     }
 
     private double calculateIMC(User user) {
@@ -87,10 +100,10 @@ public class ProfileService {
         return (int) (bmr * activityLevel.getMultiplier());
     }
 
-    private void calculateMacros(User user, int tdee) {
-        user.setDailyCarbsGoal((int) ((tdee * 0.40) / 4));
-        user.setDailyProteinGoal((int) ((tdee * 0.30) / 4));
-        user.setDailyFatGoal((int) ((tdee * 0.30) / 9));
+    private void calculateMacros(User user, int calorieGoal) {
+        user.setDailyCarbsGoal((int) ((calorieGoal * 0.40) / 4));
+        user.setDailyProteinGoal((int) ((calorieGoal * 0.30) / 4));
+        user.setDailyFatGoal((int) ((calorieGoal * 0.30) / 9));
     }
 
     public ProfileDataResponse getProfileData() {
@@ -103,6 +116,7 @@ public class ProfileService {
                 user.getGoalWeightKg(),
                 user.getGender(),
                 user.getActivityLevel(),
+                user.getObjective(),
                 user.getDailyCaloriesGoal(),
                 user.getDailyProteinGoal(),
                 user.getDailyCarbsGoal(),

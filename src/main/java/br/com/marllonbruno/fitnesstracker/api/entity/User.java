@@ -2,6 +2,7 @@ package br.com.marllonbruno.fitnesstracker.api.entity;
 
 import br.com.marllonbruno.fitnesstracker.api.entity.enuns.ActivityLevel;
 import br.com.marllonbruno.fitnesstracker.api.entity.enuns.Gender;
+import br.com.marllonbruno.fitnesstracker.api.entity.enuns.Objective;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -74,6 +75,9 @@ public class User implements UserDetails, Serializable {
 
     @Column(name = "tmb", columnDefinition = "NUMERIC(10,2)")
     private Double tmb;
+
+    @Enumerated(EnumType.STRING)
+    private Objective objective;
 
     private boolean active = true;
 

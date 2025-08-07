@@ -1,0 +1,2 @@
+ALTER TABLE users
+ADD COLUMN objective VARCHAR(50);

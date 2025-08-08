@@ -63,7 +63,7 @@ public class ProfileService {
     private static final int CALORIC_SURPLUS = 300;  // Superávit de 300 kcal para ganho de massa
 
 
-    private void calculateAllMetrics(User user) {
+    public void calculateAllMetrics(User user) {
         double imc = calculateIMC(user);
         user.setImc(imc);
 

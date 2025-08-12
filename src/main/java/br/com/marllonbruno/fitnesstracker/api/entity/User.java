@@ -81,6 +81,15 @@ public class User implements UserDetails, Serializable {
 
     private boolean active = true;
 
+    public boolean isProfileComplete() {
+        return birthDate != null &&
+                heightCm != null &&
+                currentWeightKg != null &&
+                gender != null &&
+                activityLevel != null &&
+                objective != null;
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of();

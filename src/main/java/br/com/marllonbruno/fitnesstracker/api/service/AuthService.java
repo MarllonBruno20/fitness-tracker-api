@@ -42,7 +42,7 @@ public class AuthService {
         userRepository.save(user);
 
         String jwtToken = jwtUtil.generateToken(user);
-        return new AuthenticationResponse(jwtToken);
+        return new AuthenticationResponse(jwtToken, false);
     }
 
     // Dentro da classe AuthService.java
@@ -74,7 +74,9 @@ public class AuthService {
                 .orElseThrow(() -> new RuntimeException("Erro inesperado ao buscar usuário após autenticação."));
 
         String jwtToken = jwtUtil.generateToken(user);
-        return new AuthenticationResponse(jwtToken);
+        boolean isProfileComplete = user.isProfileComplete();
+
+        return new AuthenticationResponse(jwtToken, isProfileComplete);
     }
 
 }

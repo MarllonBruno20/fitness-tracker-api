@@ -32,11 +32,11 @@ public class RecipeIngredient implements Serializable {
     private Ingredient ingredient;
 
     // --- CAMPO PARA CÁLCULO (A FONTE DA VERDADE NUTRICIONAL) ---
-    @Column(name = "quantity_in_grams", nullable = false)
+    @Column(name = "quantity_in_grams", nullable = false, columnDefinition = "NUMERIC(10, 2)")
     private Double quantityInGrams;
 
     // --- CAMPOS PARA EXIBIÇÃO (O QUE O USUÁRIO INSERIU) ---
-    @Column(name = "display_quantity", nullable = false)
+    @Column(name = "display_quantity", nullable = false, columnDefinition = "NUMERIC(10, 2)")
     private Double displayQuantity; // Ex: 1.0, 2.5, 100.0
 
     @Column(name = "display_unit", nullable = false)

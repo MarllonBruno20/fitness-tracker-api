@@ -9,7 +9,7 @@ public record RecipeDetailResponse(
         Long id,
         String name,
         String description,
-        String instructions,
+        List<String> instructions,
         String image,
         Integer prepTimeMinutes,
         Integer servings,

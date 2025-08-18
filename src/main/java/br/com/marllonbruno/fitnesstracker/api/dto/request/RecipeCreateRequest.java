@@ -8,15 +8,15 @@ import jakarta.validation.constraints.Positive;
 
 import java.util.List;
 
-public record RecipeCreateRequestDTO (
+public record RecipeCreateRequest(
         @NotBlank(message = "Por favor, informe o nome da receita")
         String name,
 
         @NotBlank(message = "Por favor, informe a descrição da receita")
         String description,
 
-        @NotBlank(message = "Por favor, informe as instruções da receita")
-        String instructions,
+        @NotEmpty(message = "Por favor, informe as instruções da receita")
+        List<String> instructions,
 
         @NotBlank(message = "Por favor, informe a imagem da receita")
         String image,

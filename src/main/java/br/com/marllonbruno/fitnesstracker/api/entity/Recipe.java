@@ -30,8 +30,11 @@ public class Recipe implements Serializable {
     @Column(nullable = false)
     private String description;
 
-    @Column(nullable = false)
-    private String instructions;
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(name = "recipe_steps", joinColumns = @JoinColumn(name = "recipe_id"))
+    @Column(name = "step_description", nullable = false)
+    @OrderColumn(name = "step_order")
+    private List<String> instructions = new ArrayList<>();
 
     @Column(nullable = false)
     private String image;

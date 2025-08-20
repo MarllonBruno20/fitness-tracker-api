@@ -24,8 +24,11 @@ public class Ingredient implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, unique = true)
-    private String name;
+    @Column(name = "display_name", nullable = false, unique = true)
+    private String displayName;
+
+    @Column(name = "search_tags", nullable = false)
+    private String searchTags;
 
     @Column(name = "unit_of_measurement", nullable = false)
     @Enumerated(EnumType.STRING)

@@ -1,5 +1,6 @@
 package br.com.marllonbruno.fitnesstracker.api.entity;
 
+import br.com.marllonbruno.fitnesstracker.api.entity.enuns.MealType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -66,5 +67,11 @@ public class Recipe implements Serializable {
             orphanRemoval = true
     )
     private List<RecipeIngredient> recipeIngredients = new ArrayList<>();
+
+    @ElementCollection(targetClass = MealType.class, fetch = FetchType.EAGER)
+    @CollectionTable(name = "recipe_meal_types", joinColumns = @JoinColumn(name = "recipe_id"))
+    @Enumerated(EnumType.STRING)
+    @Column(name = "meal_type", nullable = false)
+    private List<MealType> suitableMeals = new ArrayList<>();
 
 }

@@ -1,0 +1,34 @@
+package br.com.marllonbruno.fitnesstracker.api.controller;
+
+import br.com.marllonbruno.fitnesstracker.api.dto.request.IngredientCreationRequest;
+import br.com.marllonbruno.fitnesstracker.api.dto.response.IngredientCreationResponse;
+import br.com.marllonbruno.fitnesstracker.api.service.IngredientService;
+import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping("/api/ingredients")
+public class IngredientController {
+
+    private final IngredientService ingredientService;
+
+    public IngredientController(IngredientService ingredientService) {
+        this.ingredientService = ingredientService;
+    }
+
+    @PostMapping("/new")
+    public ResponseEntity<IngredientCreationResponse> newIngredient(@Valid @RequestBody IngredientCreationRequest request) {
+
+        System.out.println("Entrou no newIngredient");
+
+        IngredientCreationResponse response = ingredientService.saveIngredient(request);
+
+        // Retorne o status 201 Created com o objeto criado no corpo
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
+    }
+}

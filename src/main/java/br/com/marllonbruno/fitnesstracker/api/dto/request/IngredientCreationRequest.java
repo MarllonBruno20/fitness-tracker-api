@@ -20,23 +20,23 @@ public record IngredientCreationRequest(
         @NotNull(message = "Por favor, informe o grupo do ingrediente")
         Group group,
 
-        @Positive(message = "Por favor, a quantidade de calorias por 100 gramas deve ser maior que zero")
+        @PositiveOrZero(message = "Por favor, a quantidade de calorias por 100 gramas deve ser maior ou igual a zero")
         @NotNull(message = "Por favor, informe a quantidade de calorias por 100 gramas")
         Double caloriesPer100,
 
-        @Positive(message = "Por favor, a quantidade de carboidratos totais por 100 gramas deve ser maior que zero")
+        @PositiveOrZero(message = "Por favor, a quantidade de carboidratos totais por 100 gramas deve ser maior ou igual a zero")
         @NotNull(message = "Por favor, informe a quantidade de carboidratos totais por 100 gramas")
         Double totalCarbohydratePer100,
 
-        @Positive(message = "Por favor, a quantidade de carboidratos disponíveis por 100 gramas deve ser maior que zero")
+        @PositiveOrZero(message = "Por favor, a quantidade de carboidratos disponíveis por 100 gramas deve ser maior ou igual a zero")
         @NotNull(message = "Por favor, informe a quantidade de carboidratos disponíveis por 100 gramas")
         Double availableCarbohydratePer100,
 
-        @Positive(message = "Por favor, a quantidade de proteínas por 100 gramas deve ser maior que zero")
+        @PositiveOrZero(message = "Por favor, a quantidade de proteínas por 100 gramas deve ser maior ou igual a zero")
         @NotNull(message = "Por favor, informe a quantidade de proteínas por 100 gramas")
         Double proteinPer100,
 
-        @Positive(message = "Por favor, a quantidade de lípidios por 100 gramas deve ser maior que zero")
+        @PositiveOrZero(message = "Por favor, a quantidade de lípidios por 100 gramas deve ser maior ou igual a zero")
         @NotNull(message = "Por favor, informe a quantidade de lípidios por 100 gramas")
         Double lipidsPer100,
 
@@ -44,19 +44,19 @@ public record IngredientCreationRequest(
         @NotNull(message = "Por favor, informe a quantidade de fibras por 100 gramas")
         Double fiberPer100,
 
-        @Positive(message = "Por favor, a quantidade de colesterol por 100 gramas deve ser maior que zero")
+        @PositiveOrZero(message = "Por favor, a quantidade de colesterol por 100 gramas deve ser maior ou igual a zero")
         @NotNull(message = "Por favor, informe a quantidade de colesterol por 100 gramas")
         Double cholesterolPer100,
 
-        @Positive(message = "Por favor, a quantidade de gorduras saturadas por 100 gramas deve ser maior que zero")
+        @PositiveOrZero(message = "Por favor, a quantidade de gorduras saturadas por 100 gramas deve ser maior ou igual a zero")
         @NotNull(message = "Por favor, informe a quantidade de gorduras saturadas por 100 gramas")
         Double totalSaturatedFattyAcidsPer100,
 
-        @Positive(message = "Por favor, a quantidade de gorduras trans por 100 gramas deve ser maior que zero")
+        @PositiveOrZero(message = "Por favor, a quantidade de gorduras trans por 100 gramas deve ser maior ou igual a zero")
         @NotNull(message = "Por favor, informe a quantidade de gorduras trans por 100 gramas")
         Double transFattyAcidsPer100,
 
-        @Positive(message = "Por favor, a quantidade de cálcio por 100 gramas deve ser maior que zero")
+        @PositiveOrZero(message = "Por favor, a quantidade de cálcio por 100 gramas deve ser maior ou igual a zero")
         @NotNull(message = "Por favor, informe a quantidade de cálcio por 100 gramas")
         Double calciumPer100,
 

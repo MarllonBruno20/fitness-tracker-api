@@ -37,10 +37,11 @@ public class RecipeIngredient implements Serializable {
 
     // --- CAMPOS PARA EXIBIÇÃO (O QUE O USUÁRIO INSERIU) ---
     @Column(name = "display_quantity", nullable = false, columnDefinition = "NUMERIC(10, 2)")
-    private Double displayQuantity; // Ex: 1.0, 2.5, 100.0
+    private Double displayQuantity; // Armazenar o número que o usuário digitou, correspondente à displayUnit selecionada.
 
     @Column(name = "display_unit", nullable = false)
     @Enumerated(EnumType.STRING)
-    private RecipeIngredientMeasurementUnit displayUnit; // Ex: CUP, GRAMS, UNIT
+    // Armazenar a unidade de medida que o usuário escolheu na interface do aplicativo. É um campo focado na experiência do usuário (UX).
+    private RecipeIngredientMeasurementUnit displayUnit;
 
 }

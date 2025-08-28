@@ -16,27 +16,17 @@ import java.time.Period;
 @Service
 public class ProfileService {
     private final UserRepository userRepository;
+    private final AutheticatedUserService autheticatedUserService;
 
-    public ProfileService(UserRepository userRepository) {
+    public ProfileService(UserRepository userRepository, AutheticatedUserService autheticatedUserService) {
         this.userRepository = userRepository;
-    }
-
-    private User getAuthenticatedUser() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if(authentication == null || !authentication.isAuthenticated()) {
-            throw new IllegalStateException("Nenhum usuário autenticado encontrado.");
-        }
-
-        String userEmail = authentication.getName();
-        return userRepository.findByEmail(userEmail)
-                .orElseThrow(() -> new IllegalStateException("Nenhum usuário encontrado com o email " + userEmail));
-
+        this.autheticatedUserService = autheticatedUserService;
     }
 
     public User updateUser(ProfileUpdateRequest request) {
 
         // Já pego o usuário autenticado, responsável pela requisição
-        User currentUser = getAuthenticatedUser();
+        User currentUser = autheticatedUserService.getAuthenticatedUser();
         System.out.println("Encontrei o usuário autenticado: " + currentUser.getEmail());
 
         updateUserDataFromRequest(currentUser, request);
@@ -107,7 +97,7 @@ public class ProfileService {
     }
 
     public ProfileDataResponse getProfileData() {
-        User user = getAuthenticatedUser();
+        User user = autheticatedUserService.getAuthenticatedUser();
         return new ProfileDataResponse(
                 user.getName(),
                 user.getBirthDate(),

@@ -2,10 +2,12 @@ package br.com.marllonbruno.fitnesstracker.api.service;
 
 import br.com.marllonbruno.fitnesstracker.api.dto.request.IngredientCreationRequest;
 import br.com.marllonbruno.fitnesstracker.api.dto.response.IngredientCreationResponse;
+import br.com.marllonbruno.fitnesstracker.api.dto.response.IngredientListResponse;
 import br.com.marllonbruno.fitnesstracker.api.entity.Ingredient;
 import br.com.marllonbruno.fitnesstracker.api.repository.IngredientRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -86,5 +88,35 @@ public class IngredientService {
                 savedIngredient.getAddedSaltPer100(),
                 savedIngredient.getAddedSugarPer100()
                 );
+    }
+
+   public List<IngredientListResponse> listAllIngredients() {
+        return ingredientRepository.findAll().stream()
+                .map(ingredient -> new IngredientListResponse(
+                        ingredient.getId(),
+                        ingredient.getSearchTags(),
+                        ingredient.getIngredientMeasurementUnitOfMeasurement().getAbbreviation(),
+                        ingredient.getGroup().getDescription(),
+                        ingredient.getCaloriesPer100(),
+                        ingredient.getAvailableCarbohydratePer100(),
+                        ingredient.getProteinPer100(),
+                        ingredient.getLipidsPer100()
+                ))
+                .toList();
+    }
+
+    public List<IngredientListResponse> searchIngredients(String searchTerm) {
+        return ingredientRepository.searchIngredients(searchTerm).stream()
+                .map(ingredient -> new IngredientListResponse(
+                        ingredient.getId(),
+                        ingredient.getSearchTags(),
+                        ingredient.getIngredientMeasurementUnitOfMeasurement().getAbbreviation(),
+                        ingredient.getGroup().getDescription(),
+                        ingredient.getCaloriesPer100(),
+                        ingredient.getAvailableCarbohydratePer100(),
+                        ingredient.getProteinPer100(),
+                        ingredient.getLipidsPer100()
+                ))
+                .toList();
     }
 }

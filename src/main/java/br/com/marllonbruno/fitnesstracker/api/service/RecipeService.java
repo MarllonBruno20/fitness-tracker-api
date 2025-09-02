@@ -171,6 +171,7 @@ public class RecipeService {
 
     }
 
+    @Transactional(readOnly = true)
     public RecipeDetailResponse getRecipeDetails(Long id){
 
         Recipe recipe = recipeRepository.findById(id)

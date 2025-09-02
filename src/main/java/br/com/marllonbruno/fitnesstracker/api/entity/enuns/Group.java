@@ -1,5 +1,8 @@
 package br.com.marllonbruno.fitnesstracker.api.entity.enuns;
 
+import lombok.Getter;
+
+@Getter
 public enum Group {
     BEVERAGES("Bebidas"),
     CEREAL_AND_DERIVATIVES("Cereais e derivados"),

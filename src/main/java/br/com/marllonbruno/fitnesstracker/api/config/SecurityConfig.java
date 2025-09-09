@@ -3,6 +3,7 @@ package br.com.marllonbruno.fitnesstracker.api.config;
 import br.com.marllonbruno.fitnesstracker.api.security.JwtAuthenticationFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -35,7 +36,9 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/auth/**").permitAll() // Permite acesso a /api/auth/register e /api/auth/login
+                        .requestMatchers("/api/ingredients/**").permitAll()
                         .requestMatchers("/api/profile/**").authenticated()
+                        .requestMatchers(HttpMethod.POST, "/api/recipes").authenticated()
                         .anyRequest().authenticated() // Exige autenticação para todas as outras
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

@@ -16,7 +16,4 @@ public enum ActivityLevel {
         this.multiplier = multiplier;
     }
 
-    public double getMultiplier() {
-        return multiplier;
-    }
 }
